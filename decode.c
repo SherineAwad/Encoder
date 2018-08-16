@@ -68,13 +68,13 @@ while(1)
 if(feof(fp) ) break;
 }
 fclose(fp);
-printf("We are here printing datat from inside decode \n"); 
+/*printf("We are here printing datat from inside decode \n"); 
 for(i =0;i<ROWS;i++)
 	{
         for(j =0;j<COLS;j++) 
 		printf("%d,", datat[i][j]);
 	printf("--\n");
-        }
+        }*/
 *r =ROWS;
 *c =COLS;
 return(datat);
