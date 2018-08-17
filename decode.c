@@ -4,12 +4,12 @@
 #include <errno.h>
 #include <limits.h>
 
-int ** transpose(int ** data, int ROWS, int COLS)
+size_t ** transpose(size_t ** data,size_t ROWS, size_t COLS)
 {
 int i, j;
-int **datat = (int **)malloc(ROWS * sizeof(int *));
+size_t **datat = (size_t **)malloc(ROWS * sizeof(size_t *));
 for (i=0; i<ROWS; i++)
-         datat[i] = (int *)malloc(COLS * sizeof(int));
+         datat[i] = (size_t *)malloc(COLS * sizeof(size_t));
 printf("ROWS and COLS %d,%d \n", ROWS, COLS);
 for(i=0;i<ROWS;i++)
 	for(j=0;j<COLS;j++) 
@@ -17,19 +17,19 @@ for(i=0;i<ROWS;i++)
 return(datat);
 }
 //--------------------------------------Decode--------------------------------------
-int ** decode(char* file,int *r, int *c)
+size_t ** decode(char* file,size_t *r, size_t *c)
 {
 FILE *fp;
-int ROWS, COLS;
+size_t ROWS, COLS;
 int i, j; //iterators  
 printf("We are here in the decoding process \n");
 fp = fopen(file, "r");
 fscanf(fp, "%d,%d", &ROWS, &COLS); //first row in the encoded file is the rows and cols of the new encoded array.
 printf("After reading %d %d \n", ROWS, COLS);  
 //declare your array of the sixe you read from header of encoded file 
-int **datat = malloc(ROWS * sizeof(int*));
+size_t **datat = malloc(ROWS * sizeof(size_t*));
 for (i = 0; i < ROWS; i++)
-    datat[i] = malloc(COLS * sizeof(int));
+    datat[i] = malloc(COLS * sizeof(size_t));
 //initialize the array with zeros 
 for(i=0;i<ROWS;i++) 
  for(j=0;j<COLS;j++)  
@@ -71,12 +71,12 @@ int rowid = atoi(argv[2]);
 char * infile = argv[1];
 FILE *fp; 
 int i,j; 
-const int max= 1000000; 
-int  ROWS =max;
-int  COLS =max;
-int** datat = decode(infile,&ROWS,&COLS); 
+//const int max= 1000000; 
+size_t  ROWS;
+size_t  COLS;
+size_t** datat = decode(infile,&ROWS,&COLS); 
 printf("We are done after decoding and R, C are : %d %d \n",ROWS, COLS);
-int** data = transpose(datat,COLS,ROWS); //swap COLS and ROWS for transpose 
+size_t** data = transpose(datat,COLS,ROWS); //swap COLS and ROWS for transpose 
 printf("%s", "We are done transposing to original form \n");
 printf("row id is %d \n", rowid);
 for (i =0; i<ROWS; i++) //we are back to the original size 

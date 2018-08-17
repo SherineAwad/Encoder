@@ -4,15 +4,16 @@
 #include <limits.h>
 #include <stdlib.h>
 #include <zlib.h>
+#include <stdint.h>
 //-------------------------Encode Transpose----------
-int** transpose(int **data, int ROWS, int COLS )
+size_t** transpose(size_t **data, size_t ROWS, size_t COLS )
 {
-int temp = ROWS;
+size_t temp = ROWS;
 int i, j;
 printf("We will start transposing with passed ROWS $ COLS %d %d\n", ROWS, COLS);
-int **datat = (int **)malloc(COLS * sizeof(int *));
+size_t **datat = (size_t **)malloc(COLS * sizeof(size_t*));
 for (i=0; i<COLS; i++)
-        datat[i] = (int *)malloc(ROWS * sizeof(int));
+        datat[i] = (size_t*)malloc(ROWS * sizeof(size_t));
 //--------------TRANSPOSE
 for(i=0;i<COLS;i++)
    for(j=0;j<ROWS;j++)
@@ -21,7 +22,7 @@ for(i=0;i<COLS;i++)
 return(datat);
 }
 //-------------------------------------------------------------------------------
-int ** read_file(char* infile, int *rows, int *cols)
+size_t ** read_file(char* infile, size_t *rows, size_t *cols)
 {
 FILE * fp;
 char * line = NULL;
@@ -31,11 +32,13 @@ const char *sep = " ";
 int i = 0;
 int j = 0;
 char *token = NULL;
-const int max= 1000000;
-int ROWS =max, COLS =max;
-int **data = malloc(ROWS * sizeof(int*));
+const long max =1000000;
+//const long max = 10E9; // or max =SIZE_MAX;  we will need 1 GB RAM, we can ask for this as a requirement, simplifying for my own machine.
+size_t ROWS = max;
+size_t COLS = max;
+size_t**data = malloc(ROWS * sizeof(size_t*));
 for (i = 0; i < ROWS; i++)
-    data[i] = malloc(COLS * sizeof(int));
+    data[i] = malloc(COLS * sizeof(size_t));
 
 fp = fopen(infile, "r");
 if (fp == NULL)
@@ -64,7 +67,7 @@ COLS = j+1;
 return data;
 }
 //-------------------------------------Compress each row-------------------------
-void compressf(int** datat, int ROWS, int COLS, char* outfile)
+void compressf(size_t** datat, size_t ROWS, size_t COLS, char* outfile)
 {
 int i, j; //iterators 
 FILE *fp;
@@ -105,17 +108,21 @@ if (argc < 3)
 	return(1);
         }
 infile =argv[1];
-int i,j; 
-int ROWS ,COLS;
-int **data = malloc(ROWS * sizeof(int*));
+size_t i,j; 
+size_t ROWS ,COLS;
+ROWS = 0; 
+COLS = 0;
+/*size_t **data = malloc(ROWS * sizeof(size_t*));
 for (i = 0; i < ROWS; i++)
-    data[i] = malloc(COLS * sizeof(int));
-data =read_file(infile,&ROWS,&COLS);
+    data[i] = malloc(COLS * sizeof(size_t));
+*/
+size_t **data =read_file(infile,&ROWS,&COLS);
 printf("After reading file we have ROWS and COLS: ");
 printf("%d, %d \n", ROWS, COLS);
-int**datat = transpose(data,ROWS, COLS); 
+size_t**datat = transpose(data,ROWS, COLS); 
 printf("Done transposing \n");
 compressf(datat, ROWS, COLS, outfile);
 free(data);
+free(datat);
 return(0);
 }
