@@ -8,18 +8,17 @@ Example:
 
 Lets say we have sample.txt and it contains 6*5 matrix: 
 
-0 1 0 1 0
+    0 1 0 1 0
 
-1 0 0 0 1
+    1 0 1 0 1
 
-0 1 0 1 0
+    0 0 0 1 0
 
-1 0 1 0 1
+    1 0 1 0 1
 
-0 1 0 1 0
+    0 1 0 1 0
 
-1 1 1 0 1
-
+    1 1 1 1 1
 
 to encode this file, we can run:: 
 
@@ -37,15 +36,15 @@ What encode will do step by step is:
 It will transpose the matrix so it becomes::
  
 
-0 1 0 1 0 1
+    0 1 0 1 0 1
 
-1 0 1 0 1 1 
+    1 0 0 0 1 1 
 
-0 0 0 1 0 1
+    0 1 0 1 0 1
 
-1 0 1 0 1 0
+    1 0 1 0 1 1 
 
-0 1 0 1 0 1
+    0 1 0 1 0 1
 
 
 Then, it will compress each row by writing only the row id and the cols id where the value is 1. This is a simplified version of CRS.
@@ -56,28 +55,28 @@ So the first row will be compressed as:
 
 the final encoded file will contain in the first row the size of the transpose matrix in this case 5*6 and each compressed row seperated by -1 and finaly -100. 
 
-So it will be:: 
+So it will be::
 
 
     5,6
-    0,1,3,5,-1,1,0,2,4,-1,2,1,3,5,-1,3,0,2,4,-1,4,1,3,5,-1,-100
-
+    0,1,3,5,-1,1,0,4,5,-1,2,1,3,5,-1,3,0,2,4,5,-1,4,1,3,5,-1,-100
 
 To decode, the program will read the first row to get the size of the compressed file and constucts a matrix of this size and initalize it with zero.  
 It loops through rows, the first element is the row id, and it fills those cols it reads with 1 in the matrix. 
 
-To decode we run:: 
+To decode we run::
 
 
-    cc decode.c -o derun 
+    cc decode.c -o derun
+ 
 
-then we need to pass the compressed file we have in the encoding step and the row id we need to print:: 
+then we need to pass the compressed file we have in the encoding step and the row id we need to print::
 
 
      ./derun compressed.txt  0 
 
 
-The previous command will return:: 
+The previous command will return::
 
 
     0  1  0  1  0
@@ -85,3 +84,13 @@ The previous command will return::
 which is the first row in the original matrix in the sample.txt before encoding. 
 
 
+and:: 
+
+ 
+     ./derun compressed.txt 5 
+
+
+will return:: 
+
+
+    1  1  1  1  1   

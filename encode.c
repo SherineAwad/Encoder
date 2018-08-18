@@ -10,7 +10,7 @@ size_t** transpose(size_t **data, size_t ROWS, size_t COLS )
 {
 size_t temp = ROWS;
 int i, j;
-printf("We will start transposing with passed ROWS $ COLS %d %d\n", ROWS, COLS);
+printf("We will start transposing your %d ROWS and %d COLS file \n", ROWS, COLS);
 size_t **datat = (size_t **)malloc(COLS * sizeof(size_t*));
 for (i=0; i<COLS; i++)
         datat[i] = (size_t*)malloc(ROWS * sizeof(size_t));
@@ -48,6 +48,7 @@ if (fp == NULL)
       }
 int myrow =0;
 j =-1;
+printf("We are reading your file \n");
 while ((read=getline(&line, &len, fp)) != -1)
   {
    j =-1;
@@ -79,7 +80,7 @@ if ( fp == NULL )
     exit(1);
 } 
 fprintf(fp,"%d,%d\n", COLS, ROWS); // write size of our transposed matrix in header of encoded file 
-printf("Here in Compress %d %d", ROWS, COLS);
+printf("We are compressing your %d rows and %d cols file \n", ROWS, COLS);
 for(i=0;i<COLS; i++)  
   {
   fprintf(fp, "%d,", i); //write rowid 
@@ -104,7 +105,7 @@ char * outfile = argv[2];
 FILE* fp;
 if (argc < 3) 
 	{
-	printf("Incorrect no. of input, check you entered file name to compress and output file \n");
+	printf("Incorrect no. of input, check you entered input file name to compress and output file name \n");
 	return(1);
         }
 infile =argv[1];
@@ -112,13 +113,8 @@ size_t i,j;
 size_t ROWS ,COLS;
 ROWS = 0; 
 COLS = 0;
-/*size_t **data = malloc(ROWS * sizeof(size_t*));
-for (i = 0; i < ROWS; i++)
-    data[i] = malloc(COLS * sizeof(size_t));
-*/
 size_t **data =read_file(infile,&ROWS,&COLS);
-printf("After reading file we have ROWS and COLS: ");
-printf("%d, %d \n", ROWS, COLS);
+printf("Your file has %d ROWS and %d COLS \n", ROWS, COLS);
 size_t**datat = transpose(data,ROWS, COLS); 
 printf("Done transposing \n");
 compressf(datat, ROWS, COLS, outfile);
