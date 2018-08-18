@@ -99,16 +99,16 @@ will return::
 A run on a bigger sample 
 ------------------------
 
-::
+Lets creat rand.dat::
   
      (for i in `seq 1 1000`; do (for j in `seq 1 10000`; do echo $((RANDOM % 2 * RANDOM % 2)); done ) | paste -sd ' ' -; done ) > rand.dat
 
-::
+Checking the size of rand.dat::
 
       ls -lah rand.dat 
 
 
-:: 
+rand.dat is 20M:: 
 
 
      -rw-r--r-- 1 hhx779 users 20M Aug 18 14:22 rand.dat 
@@ -116,13 +116,13 @@ A run on a bigger sample
 
 
 
-:: 
+Lets encode and record time 'simplified time':: 
 
 
     time ./run rand.dat compressed.dat  
 
 
-:: 
+Less than a minute:: 
 
 
    time ./run rand.dat compressed.dat 
@@ -137,25 +137,25 @@ A run on a bigger sample
    sys	0m9.853s 
 
 
-:: 
+Lets check size of compressed.dat:: 
 
 
       ls -lah compressed.dat 
 
 
-:: 
+compressed.dat is 9.4M, approximately 47% of rand.dat size:: 
 
 
      -rwxr-xr-x 1 hhx779 users 9.4M Aug 18 14:24 compressed.dat
 
 
-::
+Lets decode and record simiplified time::
 
 
     time ./derun compressed.dat 1 >out
 
 
-:: 
+Again less than a minute:: 
 
 
     real	0m11.327s
