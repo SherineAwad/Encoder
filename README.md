@@ -93,4 +93,68 @@ and::
 will return:: 
 
 
-    1  1  1  1  1   
+    1  1  1  1  1  
+
+
+A run on a bigger sample: 
+---------------------------
+
+::
+  
+     (for i in `seq 1 1000`; do (for j in `seq 1 10000`; do echo $((RANDOM % 2 * RANDOM % 2)); done ) | paste -sd ' ' -; done ) > rand.dat
+
+::
+
+      ls -lah rand.dat 
+
+
+:: 
+
+
+     -rw-r--r-- 1 hhx779 users 20M Aug 18 14:22 rand.dat 
+
+
+
+
+:: 
+
+
+    time ./run rand.dat compressed.dat  
+
+
+:: 
+
+
+   time ./run rand.dat compressed.dat 
+   We are reading your file 
+   Your file has 1000 ROWS and 10000 COLS 
+   We will start transposing your 1000 ROWS and 10000 COLS file 
+   Done transposing 
+   We are compressing your 1000 rows and 10000 cols file 
+   Done Compressing 
+   real	0m11.327s
+   user	0m1.470s
+   sys	0m9.853s 
+
+
+:: 
+
+      ls -lah compressed.dat 
+
+
+:: 
+
+     -rwxr-xr-x 1 hhx779 users 9.4M Aug 18 14:24 compressed.dat
+
+
+::
+
+    time ./derun compressed.dat 1 >out
+
+
+:: 
+
+
+    real	0m11.327s
+    user	0m1.470s
+    sys	0m9.853s

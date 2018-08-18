@@ -77,7 +77,7 @@ int i,j;
 size_t  ROWS;
 size_t  COLS;
 size_t** datat = decode(infile,&ROWS,&COLS); 
-if (rowid >= COLS) //COLS is the rows of the original matrix  
+if ( (rowid >= COLS) || (rowid <0) )  //COLS is the rows of the original matrix  
     {
      printf("You requested a row that exceeds your file size or make sure you use zero index, first row is 0\n");
      exit(EXIT_FAILURE);
