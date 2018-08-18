@@ -4,18 +4,6 @@
 #include <errno.h>
 #include <limits.h>
 
-size_t ** transpose(size_t ** data,size_t ROWS, size_t COLS)
-{
-int i, j;
-size_t **datat = (size_t **)malloc(ROWS * sizeof(size_t *));
-for (i=0; i<ROWS; i++)
-         datat[i] = (size_t *)malloc(COLS * sizeof(size_t));
-printf("ROWS and COLS %d,%d \n", ROWS, COLS);
-for(i=0;i<ROWS;i++)
-	for(j=0;j<COLS;j++) 
-	     datat[i][j] = data[j][i];//{printf("%d, %d,%d \n", j, i, data[j][i]);datat[i][j]= data[j][i];}
-return(datat);
-}
 //--------------------------------------Decode--------------------------------------
 size_t ** decode(char* file,size_t *r, size_t *c)
 {
@@ -77,18 +65,15 @@ int i,j;
 size_t  ROWS;
 size_t  COLS;
 size_t** datat = decode(infile,&ROWS,&COLS); 
-if ( (rowid >= COLS) || (rowid <0) )  //COLS is the rows of the original matrix  
+if ( (rowid >= ROWS) || (rowid <0) )  //COLS is the rows of the original matrix  
     {
      printf("You requested a row that exceeds your file size or make sure you use zero index, first row is 0\n");
      exit(EXIT_FAILURE);
     }
 printf("We are done decoding and your file now has %d Rows and %d COLS \n",ROWS, COLS);
-size_t** data = transpose(datat,COLS,ROWS); //swap COLS and ROWS for transpose 
-printf("%s", "We are done transposing to original form \n");
 printf("row id is %d \n", rowid);
-for (i =0; i<ROWS; i++) //we are back to the original size 
-	printf("%d %c", data[rowid][i],' '); 
-free(data);
+for (i =0; i<COLS; i++) 
+	printf("%d %c", datat[rowid][i],' '); 
 free(datat);
 return(0);
 }
