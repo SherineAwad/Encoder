@@ -96,8 +96,8 @@ will return::
     1  1  1  1  1  
 
 
-A run on a bigger sample: 
----------------------------
+A run on a bigger sample 
+------------------------
 
 ::
   
@@ -139,15 +139,18 @@ A run on a bigger sample:
 
 :: 
 
+
       ls -lah compressed.dat 
 
 
 :: 
 
+
      -rwxr-xr-x 1 hhx779 users 9.4M Aug 18 14:24 compressed.dat
 
 
 ::
+
 
     time ./derun compressed.dat 1 >out
 
