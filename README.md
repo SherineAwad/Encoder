@@ -6,20 +6,20 @@ To decode, it decompress each row and transpose the matrix to its original and r
 Example: 
 --------
 
-Lets say we have sample.txt and it contains 6*5 matrix: 
+Lets say we have sample.txt and it contains 6*5 matrix:: 
 
 
-0 1 0 1 1
+     0 1 0 1 1
 
-1 0 1 0 1
+     1 0 1 0 1
 
-0 0 0 1 1
+     0 0 0 1 1
 
-1 0 1 0 1
+     1 0 1 0 1
 
-0 1 0 1 1
+     0 1 0 1 1
 
-1 1 1 0 1
+     1 1 1 0 1
 
 
 to encode this file, we can run:: 
@@ -130,7 +130,7 @@ Lets encode and record time 'simplified time'::
 
 The output is as follows:: 
 
-
+        
 	We are reading your file 
 	Your file has 1000 ROWS and 10000 COLS 
 	We will start transposing your 1000 ROWS and 10000 COLS file 
@@ -142,9 +142,9 @@ The output is as follows::
 Took less than a minute:: 
  
 
-	real	0m2.601s
-	user	0m1.287s
-	sys	0m1.236s 
+	real	0m2.671s
+	user	0m1.304s
+	sys	0m1.236s
 
 
 Lets check size of compressed.dat:: 
@@ -168,12 +168,9 @@ Lets decode and record simiplified time::
 Again less than a minute:: 
 
 
-        real	0m0.364s
-	user	0m0.305s
-	sys	0m0.041s
-
-
-
+	real	0m0.375s
+	user	0m0.314s
+	sys	0m0.047s
 
 Resources
 ----------
