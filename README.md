@@ -122,7 +122,7 @@ Lets encode and record time 'simplified time'::
     time ./run rand.dat compressed.dat  
 
 
-Less than a minute:: 
+The output is as follows:: 
 
 
    time ./run rand.dat compressed.dat 
@@ -132,9 +132,14 @@ Less than a minute::
    Done transposing 
    We are compressing your 1000 rows and 10000 cols file 
    Done Compressing 
-   real	0m11.327s
-   user	0m1.470s
-   sys	0m9.853s 
+   
+
+Again, less than a minute:: 
+
+
+    real 0m11.327s
+    user 0m1.470s
+    sys	 0m9.853s 
 
 
 Lets check size of compressed.dat:: 
@@ -158,6 +163,16 @@ Lets decode and record simiplified time::
 Again less than a minute:: 
 
 
-    real	0m11.327s
-    user	0m1.470s
+    real 0m11.327s
+    user 0m1.470s
     sys	0m9.853s
+
+
+Resources
+----------
+
+
+1. http://netlib.org/linalg/html_templates/node91.html 
+2. https://stackoverflow.com/questions/18942719/reading-from-a-text-file-and-storing-in-a-2d-array
+3. https://www.youtube.com/watch?v=Lhef_jxzqCg&t=0s&index=13&list=LLZ8i9y_OkuRkKyoUx1wI1nw&ab_channel=Udacity
+4. https://stackoverflow.com/questions/4242499/preferring-malloc-over-calloc 
