@@ -9,10 +9,15 @@ Example:
 Lets say we have sample.txt and it contains 6*5 matrix: 
 
 0 1 0 1 0
+
 1 0 0 0 1
+
 0 1 0 1 0
+
 1 0 1 0 1
+
 0 1 0 1 0
+
 1 1 1 0 1
 
 
@@ -24,7 +29,7 @@ to encode this file, we can run::
 Then we need to run our compiled program and pass the sample.txt and the outputfile of compression::
  
 
-  ./run sample.txt compressed.txt 
+    ./run sample.txt compressed.txt 
 
 
 What encode will do step by step is: 
@@ -33,9 +38,13 @@ It will transpose the matrix so it becomes::
  
 
 0 1 0 1 0 1
+
 1 0 1 0 1 1 
+
 0 0 0 1 0 1
+
 1 0 1 0 1 0
+
 0 1 0 1 0 1
 
 
@@ -49,8 +58,9 @@ the final encoded file will contain in the first row the size of the transpose m
 
 So it will be:: 
 
-   5,6
-   0,1,3,5,-1,1,0,2,4,-1,2,1,3,5,-1,3,0,2,4,-1,4,1,3,5,-1,-100
+
+    5,6
+    0,1,3,5,-1,1,0,2,4,-1,2,1,3,5,-1,3,0,2,4,-1,4,1,3,5,-1,-100
 
 
 To decode, the program will read the first row to get the size of the compressed file and constucts a matrix of this size and initalize it with zero.  
@@ -69,7 +79,8 @@ then we need to pass the compressed file we have in the encoding step and the ro
 
 The previous command will return:: 
 
-  0  1  0  1  0
+
+    0  1  0  1  0
 
 which is the first row in the original matrix in the sample.txt before encoding. 
 
