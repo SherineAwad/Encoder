@@ -1,6 +1,27 @@
 This program reads a txt file composed of N*M matrix of 0 and 1. The encode program  transpose the file (row one becomes column 1, row two becomes column 2, etc.), compress each row, and store the compressed data to a new file. The decode program opens the encoded file and return the row (previously a column) specified by a command line argument.
 
-Example: 
+
+HOW TO RUN
+-----------
+	
+To run encode:: 
+
+
+    cc encode.c -o run 
+    ./run rand.dat compressed.dat 
+
+
+
+To reun decode:: 
+
+
+    cc decode.c -o derun 
+    ./derun compressed.dat 10 
+
+where rand.dat is your input file, compressed.dat is your enocded output file, and 10 is the row you request to retireve.
+
+
+Example
 --------
 
 Lets say we have sample.txt and it contains 6*5 matrix:: 
