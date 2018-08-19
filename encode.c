@@ -3,7 +3,6 @@
 #include <errno.h>
 #include <limits.h>
 #include <stdlib.h>
-#include <zlib.h>
 #include <stdint.h>
 //-------------------------Encode Transpose----------
 size_t** transpose(size_t **data, size_t ROWS, size_t COLS )
@@ -83,32 +82,29 @@ fprintf(fp,"%d,%d\n", COLS, ROWS); // write size of our transposed matrix in hea
 printf("We are compressing your %d rows and %d cols file \n", ROWS, COLS);
 for(i=0;i<COLS; i++)  
   {
-  fprintf(fp, "%d,", i); //write rowid 
+  fprintf(fp, "%d,", i); //write rowid so if a row is all zeros it is not missed
   for(j=0;j<ROWS;j++)
      {
 	if(datat[i][j] !=0) 
 	{	    
-	fprintf(fp, "%d,",j); //write the columns ids of element of row is 1 only and skip zeros. 
+	fprintf(fp, "%d,",j); //write the columns ids when element equals 1 only and skip zeros. 
 	}
      }
   fprintf(fp, "%d,",deli );
   }
-fprintf(fp, "%d", -100);
 fclose(fp);
 printf("Done Compressing \n");
 }
 //-------------------------------------Main Function----------------------------
 int main(int argc, char **argv)
 {
-char * infile = argv[1];
-char * outfile = argv[2];
-FILE* fp;
 if (argc < 3) 
 	{
 	printf("Incorrect no. of input, check you entered input file name to compress and output file name \n");
 	return(1);
         }
-infile =argv[1];
+char *infile =argv[1];
+char * outfile = argv[2]; 
 size_t i,j; 
 size_t ROWS ,COLS;
 ROWS = 0; 

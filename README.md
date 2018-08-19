@@ -1,7 +1,4 @@
-This program reads a N*M 0 and 1 matrix seperated by space from a file and encodes it. 
-To encode, it transpose the matrix, each row becomes a column. Then it compress row by row not the entire matrix and write each compressed row to a new file. 
-To decode, it decompress each row and transpose the matrix to its original and returns the row requested by the user. 
-
+This program reads a txt file composed of N*M matrix of 0 and 1. The encode program  transpose the file (row one becomes column 1, row two becomes column 2, etc.), compress each row, and store the compressed data to a new file. The decode program opens the encoded file and return the row (previously a column) specified by a command line argument.
 
 Example: 
 --------
@@ -55,13 +52,13 @@ So the first row will be compressed as:
 
 0,1,3,5,-1 and we will add -1 to seperate rows. 
 
-the final encoded file will contain in the first row the size of the transpose matrix in this case 5*6 and each compressed row seperated by -1 and finaly -100. 
+the final encoded file will contain in the first row the size of the transpose matrix in this case 5*6 and each compressed row seperated by -1. 
 
 So it will be::
 
 
      5,6
-     0,1,3,5,-1,1,0,4,5,-1,2,1,3,5,-1,3,0,2,4,-1,4,0,1,2,3,4,5,-1,-100
+     0,1,3,5,-1,1,0,4,5,-1,2,1,3,5,-1,3,0,2,4,-1,4,0,1,2,3,4,5,-1,
 
 
 To decode, the program will read the first row to get the size of the compressed file and constucts a matrix of this size and initalize it with zero.  

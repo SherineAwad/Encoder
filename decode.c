@@ -58,9 +58,8 @@ if (argc < 3)
         printf("Incorrect no. of input, enter file to decode  the row id you wish to return 0 is the first row, 1 is the second row, ..etc \n");
         return(1);
         }
-int rowid = atoi(argv[2]);
-char * infile = argv[1];
-FILE *fp; 
+int rowid = atoi(argv[2]); //row requested by user 
+char * infile = argv[1]; // compressed file passed previously to encode
 int i,j; 
 size_t  ROWS;
 size_t  COLS;
